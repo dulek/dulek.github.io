@@ -6,7 +6,7 @@
     "cname": ""
   },
   "theme": {
-    "name": "casper"
+    "name": "ichi"
   },
   "urls": {
     "site": "https://dulek.github.io",
@@ -29,7 +29,7 @@
     ]
   },
   "site": {
-    "title": "",
+    "title": "Michał's programming stuff",
     "description": "",
     "logo": "",
     "cover": "",
