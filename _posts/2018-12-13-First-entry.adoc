@@ -3,7 +3,6 @@
 // :hp-image: /covers/cover.png
 :published_at: 2018-12-13
 :hp-tags: HubPress, Blog, Open_Source
-:source-highlighter: highlightjs
 
 Hello there, let's see how this HubPress thing works. Seems like I can *bold the words easily*, or make them _italic_.
 
@@ -16,7 +15,8 @@ Let me list two things:
 
 And now some longer piece of code:
 
-```python
+[source,python]
+----
 def extract_pod_annotation(annotation):
     obj = objects.base.VersionedObject.obj_from_primitive(annotation)
     # FIXME(dulek): This is code to maintain compatibility with Queens. We can
@@ -29,4 +29,4 @@ def extract_pod_annotation(annotation):
         obj = vif.PodState(default_vif=obj)
 
     return obj
-```
+---
