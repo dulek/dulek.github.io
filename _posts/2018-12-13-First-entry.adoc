@@ -3,6 +3,7 @@
 // :hp-image: /covers/cover.png
 :published_at: 2018-12-13
 :hp-tags: HubPress, Blog, Open_Source
+:source-highlighter: highlightjs
 
 Hello there, let's see how this HubPress thing works. Seems like I can *bold the words easily*, or make them _italic_.
 
@@ -13,7 +14,7 @@ Let me list two things:
 * first
 * second
 
-And now some longer piece of code:
+And now some longer piece of code, and a mark that I've edited this:
 
 [source,python]
 ----
