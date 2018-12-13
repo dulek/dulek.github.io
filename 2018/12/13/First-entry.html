@@ -25,7 +25,7 @@
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="/apple-touch-icon-precomposed.png" rel="apple-touch-icon">
 
-    <link rel="stylesheet" type="text/css" href="//dulek.github.io/themes/uno/assets/css/uno.css?v=1544738785892" />
+    <link rel="stylesheet" type="text/css" href="//dulek.github.io/themes/uno/assets/css/uno.css?v=1544738947401" />
 
     <link rel="canonical" href="https://dulek.github.io/2018/12/13/First-entry.html" />
     <meta name="referrer" content="origin" />
@@ -188,7 +188,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def extract_pod_annotation(annotation):
+<pre class="highlight"><code class="language-python" data-lang="python">def extract_pod_annotation(annotation):
     obj = objects.base.VersionedObject.obj_from_primitive(annotation)
     # FIXME(dulek): This is code to maintain compatibility with Queens. We can
     #               remove it once we stop supporting upgrading from Queens,
@@ -199,7 +199,8 @@
         # pack it in PodState object.
         obj = vif.PodState(default_vif=obj)
 
-    return obj</code></pre>
+    return obj
+---</code></pre>
 </div>
 </div>
     </section>
@@ -236,7 +237,7 @@
         // hljs.initHighlightingOnLoad();
       </script>
 
-    <script type="text/javascript" src="//dulek.github.io/themes/uno/assets/js/main.js?v=1544738785892"></script>
+    <script type="text/javascript" src="//dulek.github.io/themes/uno/assets/js/main.js?v=1544738947401"></script>
 
 
 </body>
