@@ -16,7 +16,7 @@ Let me list two things:
 
 And now some longer piece of code, and a mark that I've edited this:
 
-[source,python]
+[source,Python]
 ----
 def extract_pod_annotation(annotation):
     obj = objects.base.VersionedObject.obj_from_primitive(annotation)
