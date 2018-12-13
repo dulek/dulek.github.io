@@ -6,12 +6,12 @@
     "cname": ""
   },
   "theme": {
-    "name": "ichi"
+    "name": "saga"
   },
   "urls": {
     "site": "https://dulek.github.io",
     "hubpress": "https://dulek.github.io",
-    "theme": "//dulek.github.io/themes/casper",
+    "theme": "//dulek.github.io/themes/ichi",
     "images": "https://dulek.github.io/images"
   },
   "initialisationConfigComponent": {
