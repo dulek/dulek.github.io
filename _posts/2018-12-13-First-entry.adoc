@@ -30,4 +30,4 @@ def extract_pod_annotation(annotation):
         obj = vif.PodState(default_vif=obj)
 
     return obj
----
+----
