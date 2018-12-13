@@ -2,7 +2,8 @@
   "meta": {
     "username": "dulek",
     "repositoryName": "dulek.github.io",
-    "branch": "master"
+    "branch": "master",
+    "cname": ""
   },
   "theme": {
     "name": "casper"
@@ -26,5 +27,31 @@
     "beforeCreate": [
       null
     ]
-  }
+  },
+  "site": {
+    "title": "",
+    "description": "",
+    "logo": "",
+    "cover": "",
+    "delay": "",
+    "postsPerPage": "",
+    "blogPath": "",
+    "googleAnalytics": "",
+    "disqus": ""
+  },
+  "socialnetwork": {
+    "email": "",
+    "github": "dulek",
+    "twitter": "",
+    "facebook": "",
+    "googleplus": "",
+    "instagram": "duulek",
+    "pinterest": "",
+    "flickr": "",
+    "linkedin": "michał-dulko",
+    "stackoverflow": "",
+    "paypalme": "",
+    "opencollective": ""
+  },
+  "navigation": []
 }
