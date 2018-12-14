@@ -15,7 +15,7 @@ Let me list two things:
 
 And now some longer piece of code:
 
-```javascript
+```python
 def extract_pod_annotation(annotation):
     obj = objects.base.VersionedObject.obj_from_primitive(annotation)
     # FIXME(dulek): This is code to maintain compatibility with Queens. We can
