@@ -11,7 +11,7 @@
   "urls": {
     "site": "https://dulek.github.io",
     "hubpress": "https://dulek.github.io",
-    "theme": "//dulek.github.io/themes/saga",
+    "theme": "//dulek.github.io/themes/uno",
     "images": "https://dulek.github.io/images"
   },
   "initialisationConfigComponent": {
