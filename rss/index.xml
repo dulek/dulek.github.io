@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Michał Dulko]]></title><description><![CDATA[All the dev stuff]]></description><link>https://dulek.github.io</link><generator>RSS for Node</generator><lastBuildDate>Fri, 14 Dec 2018 08:59:25 GMT</lastBuildDate><atom:link href="https://dulek.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[First entry]]></title><description><![CDATA[<div class="paragraph">
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Michał Dulko]]></title><description><![CDATA[All the dev stuff]]></description><link>https://dulek.github.io</link><generator>RSS for Node</generator><lastBuildDate>Fri, 14 Dec 2018 09:01:11 GMT</lastBuildDate><atom:link href="https://dulek.github.io/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title><![CDATA[First entry]]></title><description><![CDATA[<div class="paragraph">
 <p>Hello there, let&#8217;s see how this HubPress thing works. Seems like I can <strong>bold the words easily</strong>, or make them <em>italic</em>.</p>
 </div>
 <div class="paragraph">
@@ -22,7 +22,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">def extract_pod_annotation(annotation):
+<pre class="highlight"><code class="language-python" data-lang="python">def extract_pod_annotation(annotation):
     obj = objects.base.VersionedObject.obj_from_primitive(annotation)
     # FIXME(dulek): This is code to maintain compatibility with Queens. We can
     #               remove it once we stop supporting upgrading from Queens,
