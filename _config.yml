@@ -2,13 +2,21 @@ title: Dulek's Blog
 author:
   name: Michał Dulko
   email: michal.dulko@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  The stuff I code at RH.
+description: >-
+  My name is Michał Dulko. I work as an OpenShift and OpenStack developer at
+  Red Hat. This blog will gather articles about the stuff I'm coding.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://dulek.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+show_excerpts: true
 
-show_excerpts: true # set to false to remove excerpts on the homepage
-
-theme: minima
+# Build settings
 minima:
   social_links:
-    github: dulek
     linkedin: michał-dulko
+    github: dulek
+
+plugins:
+  - jekyll-feed
+  - jekyll-remote-theme
+
+remote_theme: jekyll/minima
