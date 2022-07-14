@@ -1,5 +1,6 @@
 ---
-title: "Michał Dulko Blog"
+title: "Dulek's Blog"
 ---
 
-I'm glad you are here. I plan to talk about ...
+My name is Michał Dulko. I'm a developer at Red Hat and here you'll find
+articles about the things I code there.
