@@ -1,29 +1,25 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
+title:  "First post"
 date:   2022-07-14 11:48:52 +0200
-categories: jekyll update
+categories: blog
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+Alright, so this is the first, test entry on the blog. Welcome, more content to
+follow soon. Meanwhile I'll just put a random code snippet here to have a cheat
+sheet for later. And also to see how it looks like rendered.
 
-Jekyll requires blog post files to be named according to the following format:
-
-`YEAR-MONTH-DAY-title.MARKUP`
-
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
-
-Jekyll also offers powerful support for code snippets:
-
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
+{% highlight golang %}
+/// [Actuator]
+// Actuator controls machines on a specific infrastructure. All
+// methods should be idempotent unless otherwise specified.
+type Actuator interface {
+	// Create the machine.
+	Create(context.Context, *machinev1.Machine) error
+	// Delete the machine. If no error is returned, it is assumed that all dependent resources have been cleaned up.
+	Delete(context.Context, *machinev1.Machine) error
+	// Update the machine to the provided definition.
+	Update(context.Context, *machinev1.Machine) error
+	// Checks if the machine currently exists.
+	Exists(context.Context, *machinev1.Machine) (bool, error)
+}
 {% endhighlight %}
-
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
-
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
