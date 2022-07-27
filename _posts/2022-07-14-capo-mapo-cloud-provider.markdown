@@ -32,15 +32,15 @@ Why have we ended up here, using legacy for so long? Well, making a switch is no
 
 ## CAPO, MAPO and how we got there
 
-In the case of CAPO, the OpenShift version evolved independently from the upstream version. While this allowed OpenShift to move forward more quickly, it also means that API design of the Machine and MachineSet objects diverged from what's in the upstream Kubernetes. Such a situation is hard to maintain as any bugfix made upstream most likely needs to be adapted to a different API on the OpenShift side. The team decided to act to solve the issue.
+In the case of CAPO, the OpenShift version evolved independently of the upstream version. While this allowed OpenShift to move forward more quickly, it also means that API design of the Machine and MachineSet objects diverged from what's in the upstream Kubernetes. Such a situation is hard to maintain as any bugfix made upstream most likely needs to be adapted to a different API on the OpenShift side. The team decided to act to solve the issue.
 
 What we needed was basically a translation layer between OpenShift CAPO and the upstream Kubernetes version of it. We've called it MAPO - _machine-api-provider-openstack_. MAPO is built in a pretty clever way - it watches for the OpenShift version of Machine objects, translates them into Kubernetes Machine objects and uses them to execute upstream CAPO functions that it is vendoring. An alternative approach could just be to run upstream CAPO normally and let MAPO create the K8s version of Machine objects from the OpenShift ones, but that could lead to users being confused by seeing two versions of Machine objects.
 
-It's important to say that MAPO is deployed by default starting from OpenShift 4.11 and currently it's the only supported option. For the users nothing important should change as it is supporting all the APIs that diverged OpenShift CAPO was.
+It's important to say that MAPO is deployed by default starting from OpenShift 4.11 and currently it's the only supported option. For the users nothing serious should change as it is supporting all the APIs that diverged OpenShift CAPO was.
 
 ## What's next in OpenShift on OpenStack?
 
 So what's going to happen in these topics in the near future? In the case of MAPO the answer is pretty simple - we'll just make sure to keep the vendored CAPO up to date and implement any new upstream API in our translation layer.
 
-The situation with switching out of legacy cloud provider is more complicated. The OCCM support was initially planned to be completed in 4.11, but we've hit unforseen upgrade issues. The upgrade is complicated as we cannot have two controllers running concurrently and processing events as we would end up with duplicated Octavia load-balancers or see [weird behaviors of Node objects](https://github.com/kubernetes/kubernetes/issues/109793). At the moment the migration path is planned to be completed and GA in one of the upcoming OpenShift releases.
+The situation with switching out of legacy cloud provider is more complicated. The OCCM support was initially planned to be completed in 4.11, but we've hit unforeseen upgrade issues. The upgrade is complicated as we cannot have two controllers running concurrently and processing events as we would end up with duplicated Octavia load-balancers or see [weird behaviors of Node objects](https://github.com/kubernetes/kubernetes/issues/109793). At the moment the migration path is planned to be completed and GA in one of the upcoming OpenShift releases.
 

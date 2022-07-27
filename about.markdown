@@ -10,7 +10,7 @@ software engineer for [Red Hat](https://www.redhat.com/), where I'm part of the
 team maintaining
 [OpenShift's](https://www.redhat.com/en/technologies/cloud-computing/openshift)
 integration with [OpenStack](https://www.openstack.org/). My more general
-professional intrests are related to building reliable distributed systems.
+professional interests are related to building reliable distributed systems.
 
 In my spare time I hike, sail and play guitar.
 
