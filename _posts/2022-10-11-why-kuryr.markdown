@@ -1,0 +1,96 @@
+---
+layout: post
+title:  "Kuryr - when to and when not to consider it"
+date:   2022-10-24 20:00:00 +0200
+tags: openshift openstack kubernetes kuryr
+---
+
+Kuryr-Kubernetes is a CNI plugin for Kubernetes, that uses OpenStack native
+networking layer - Neutron and Octavia, to provide networking for Pods and
+Services in K8s clusters running on OpenStack. While it's a tempting concept to
+unify the networking layers of both OpenStack and Kubernetes and there are
+clear performance benefits, such setups also have a number of disadvantages
+that I'll try to explain in this article.
+
+## Why would I even bother with Kuryr?
+
+So what are the advantages of Kuryr over, say, ovn-kubernetes? The problem with
+virtually any more complicated K8s CNI plugin is that it'll introduce double
+encapsulation of the packets. Basically Pod's packets will be wrapped with
+ovn-kubernetes tunneling on CNI level and then by Neutron tunneling on VM
+level. This means increased latency and lower throughput.  To prove this we
+did a bunch of testing a while ago and [Kuryr seems to be better in terms of
+performance in most
+cases](https://cloud.redhat.com/blog/accelerate-your-openshift-network-performance-on-openstack-with-kuryr). 
+
+![Kuryr encapsulation diagram](/assets/kuryr-tunneling.png)
+
+You can technically work this around by using a provider network in Neutron,
+but provider networks are much less flexible than virtualized tenant networks
+created on the fly, so it's not a magic bullet.
+
+Another advantage is operational simplicity. Basically it's easier to learn how
+to analyze and debug a single SDN instead of a couple, with two totally
+different concepts and virtually a blackbox on the VM level for CNI. There is a
+caveat here, you'll probably need to learn to debug Neutron features you rarely
+used before. Moreover debugging Kuryr is a thing too, but most issues boil down
+to problems in Neutron or Octavia. I'll talk more about this later in the
+article.
+
+## Issues with Kuryr environments
+
+But obviously not everything is sunshine and rainbows. Kuryr environments
+suffer from some limitations and issues related to the general design,
+underlying OpenStack infrastructure and bugs. First let's talk about problems
+introduced by design assumptions of Kuryr.
+
+First of all Kuryr is tied to OpenStack. This means that if your application
+depends on any behavior that is Kuryr-specific (manipulating Neutron ports or
+SGs, Octavia LBs, expecting each K8s namespace to have its own subnet in
+OpenStack, etc.), then you won't be able to easily run it on a non-OpenStack
+public cloud.
+
+As with Kuryr *all* Services are represented as Octavia loadbalancers, you'll
+face the usual limitations of Octavia. E.g. if you're using Amphora provider,
+each LB will be a VM that consumes some cloud resources. This is solved by
+Octavia OVN provider, but it's only available for deployments using OVN as the
+Neutron driver.
+
+Some features are currently impossible to implement with Octavia, e.g.
+``sessionAffinity``, OpenShift's automatic unidling, etc. There are also some
+bugs in Octavia that haunted Kuryr deployments. In particular with high churn
+LBs often get stuck in ``PENDING_UPDATE`` or ``PENDING_DELETE`` states which
+are immutable and Kuryr cannot do anything about them, leading to issues with
+the Service represented by that LB.
+
+Another set of problems comes from Neutron, which is used to provide networking
+for all the Pods. In general the scale Kuryr puts Neutron in is the main
+issue. With Kuryr there will be hundreds of subports attached to trunk ports
+and I don't think there's any other application that exercises Neutron in such
+scale. An obvious difference from other SDNs is that in high churn Kuryr envs
+pod creation times will be significantly higher as each time Neutron has to be
+contacted to create ports. This is slightly mitigated by Kuryr maintaining a
+pool of ports ready to be attached to pods, but it's still a problem when a lot
+of pods get created at once, e.g. when applying Helm charts.
+
+Neutron has its own bugs too. For example we've observed very high time to
+create ports when there are many concurrent bulk port create requests. Neutron
+team tracked this down to IPAM conflict-and-retry races between threads serving
+these requests and situation improved, but it can still take quite some time to
+create multiple ports. In critical cases this lead to Kuryr orphaning ports in
+OpenStack and only possible strategy we had to fix this was to periodically
+look for such ports and delete them.
+
+## Summary
+
+So when to consider Kuryr? It's probably easier to answer an opposite question.
+If you expect a lot of churn in your environment - pods and services getting
+created often and in high numbers, then you need to check if your Neutron will
+be able to handle that and the longer Pod and Services time-to-wire is
+acceptable for you. Besides that you probably want to make sure your underlying
+OpenStack cloud is in a current version, so that all the fixes Kuryr team
+requested from Neutron and Octavia teams are included.
+
+If the above issues are not of a concern for you, then you should really
+consider using Kuryr for the sake of improved performance and simplicity of the
+networking layer of your combined K8s and OpenStack clouds
